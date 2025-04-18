@@ -1,29 +1,48 @@
 .btn-danger {
-    background-color: #2e4d3f !important;
-    border-color: #2e4d3f !important;
-  }
-  
-  .btn-primary {
-    background-color: #2e4d3f !important;
-    border-color: #2e4d3f !important;
-  }
-  .navbar-vertical {
-    background-color: #0d0e12 !important;
+  background-color: #2e4d3f !important;
+  border-color: #2e4d3f !important;
 }
+
+.btn-primary {
+  background-color: #2e4d3f !important;
+  border-color: #2e4d3f !important;
+}
+
+.navbar-vertical {
+  background-color: #0d0e12 !important;
+}
+
 .navbar-light .navbar-nav .nav-link {
-    color: rgb(255 255 255) !important;
+  color: rgb(255 255 255);
 }
+
 @media (max-width: 768px) {
   .navbar-light .navbar-nav .nav-link {
-    color: black !important;
+    color: black;
   }
-    .navbar-collapse.collapsing,
+
+  .navbar-collapse.collapsing,
   .navbar-collapse.show {
     background: #fff;
     margin-top: 70px;
   }
+
   .navbar-light .navbar-toggler-icon {
     color: white !important;
     background-image: url(https://umaracademy.org/wp-content/uploads/2025/04/white-hamburger-menu-icon-24-removebg-preview.png) !important;
-}
+  }
+
+  .btn-danger {
+    background-color: #2e4d3f !important;
+    border-color: #2e4d3f !important;
+    font-size: 10px;
+    margin-left: -100px;
+    margin-top: 0px !important;
+  }
+
+  .navbar-vertical .navbar-brand>img {
+    max-height: 5rem;
+    max-width: 100%;
+    margin-left: -57px;
+  }
 }
