@@ -273,7 +273,7 @@ const TeacherAttendance = () => {
     const fetchAssignedStudents = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/users/assigned-students/${teacherId}`,
+          `${process.env.REACT_APP_API_URL || "https://quranumaracademy.onrender.com"}/api/users/assigned-students/${teacherId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setStudents(res.data);
@@ -285,7 +285,7 @@ const TeacherAttendance = () => {
     const fetchAttendance = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/attendance/teacher/history`,
+          `${process.env.REACT_APP_API_URL || "https://quranumaracademy.onrender.com"}/api/attendance/teacher/history`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setAttendanceRecords(res.data);
@@ -307,7 +307,7 @@ const TeacherAttendance = () => {
     setLoading(true);
     try {
       await axios.post(
-        `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/attendance/mark`,
+        `${process.env.REACT_APP_API_URL || "https://quranumaracademy.onrender.com"}/api/attendance/mark`,
         { studentIds: selectedStudents, status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -315,7 +315,7 @@ const TeacherAttendance = () => {
       setSelectedStudents([]);
 
       const updated = await axios.get(
-        `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/attendance/teacher/history`,
+        `${process.env.REACT_APP_API_URL || "https://quranumaracademy.onrender.com"}/api/attendance/teacher/history`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setAttendanceRecords(updated.data);
@@ -330,7 +330,7 @@ const TeacherAttendance = () => {
   const handleEdit = async (id, newStatus) => {
     try {
       await axios.put(
-        `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/attendance/update/${id}`,
+        `${process.env.REACT_APP_API_URL || "https://quranumaracademy.onrender.com"}/api/attendance/update/${id}`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

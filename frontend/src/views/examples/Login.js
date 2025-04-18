@@ -375,7 +375,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", { email, password });
+      const response = await axios.post("https://quranumaracademy.onrender.com/api/auth/login", { email, password });
       const { token, role, userId, user } = response.data;
       localStorage.setItem("user", JSON.stringify(user));
 
@@ -396,7 +396,7 @@ const Login = () => {
     if (response.tokenId) {
       try {
         const { data } = await axios.post(
-          'http://localhost:5000/api/auth/google-login',
+          'https://quranumaracademy.onrender.com/api/auth/google-login',
           { tokenId: response.tokenId }
         );
         localStorage.setItem('token', data.token);

@@ -76,7 +76,7 @@ const Index = (props) => {
 
     try {
       // Fetch all users
-      const response = await axios.get("http://localhost:5000/api/users", {
+      const response = await axios.get("https://quranumaracademy.onrender.com/api/users", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(response.data);
@@ -93,42 +93,7 @@ const Index = (props) => {
       console.error("Error fetching users:", err);
       setError("Failed to fetch users. Please try again.");
     }
-  };
-
-  // Call fetchUsers when the component mounts
-  // useEffect(() => {
-  //   fetchUsers();
-  // }, [token, navigate]);
-
-  // const fetchUsers = async () => {
-  //   const token = localStorage.getItem("token");
-  
-  //   try {
-  //     // Fetch current logged-in user
-  //     const loggedInUser = JSON.parse(localStorage.getItem("user"));
-  //     if (!loggedInUser) return;
-  
-  //     const response = await axios.get("http://localhost:5000/api/users", {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     });
-  
-  //     let filteredUsers = response.data;
-  
-  //     if (loggedInUser.role === "Teacher") {
-  //       // ✅ Show only assigned students for teachers
-  //       filteredUsers = loggedInUser.assignedStudents || [];
-  //     } else if (loggedInUser.role === "Student") {
-  //       // ✅ Show only assigned teachers for students
-  //       filteredUsers = response.data.filter((user) => user.assignedStudents?.some((id) => id === loggedInUser._id));
-  //     }
-  
-  //     setUsers(filteredUsers);
-  //   } catch (err) {
-  //     console.error("Error fetching users:", err);
-  //     setError("Failed to fetch users. Please try again.");
-  //   }
-  // };
-  
+  };  
   useEffect(() => {
     fetchUsers();
   }, [userRole, token, navigate]);
@@ -147,7 +112,7 @@ const Index = (props) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users",
+        "https://quranumaracademy.onrender.com/api/users",
         newUser,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -168,7 +133,7 @@ const Index = (props) => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/users/${editUser._id}`,
+        `https://quranumaracademy.onrender.com/api/users/${editUser._id}`,
         { name: editUser.name, email: editUser.email, role: editUser.role },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -186,7 +151,7 @@ const Index = (props) => {
   // Delete user
   const handleDeleteUser = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/users/${deleteUserId}`, {
+      await axios.delete(`https://quranumaracademy.onrender.com/api/users/${deleteUserId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(users.filter((user) => user._id !== deleteUserId));
@@ -207,7 +172,7 @@ const Index = (props) => {
   const handleRoleChange = async (userId, newRole) => {
     try {
       const response = await axios.put(
-        "http://localhost:5000/api/users/assign-role",
+        "https://quranumaracademy.onrender.com/api/users/assign-role",
         { userId, newRole },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -226,7 +191,7 @@ const Index = (props) => {
     formData.append("file", file);
 
     try {
-      await axios.post("http://localhost:5000/api/users/import", formData, {
+      await axios.post("https://quranumaracademy.onrender.com/api/users/import", formData, {
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
       });
 
@@ -239,14 +204,14 @@ const Index = (props) => {
 
   // Export Users
   const handleExport = async () => {
-    window.open("http://localhost:5000/api/users/export");
+    window.open("https://quranumaracademy.onrender.com/api/users/export");
   };
   const handleAssignRole = async (userId, newRole) => {
     try {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:5000/api/users/assign-role`,
+        `https://quranumaracademy.onrender.com/api/users/assign-role`,
         { userId, newRole },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -269,7 +234,7 @@ const Index = (props) => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:5000/api/users/assign-students",
+        "https://quranumaracademy.onrender.com/api/users/assign-students",
         { teacherId: selectedTeacher, studentIds: selectedStudents },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -380,76 +345,6 @@ const Index = (props) => {
           </Col>
         </Row>
       </Container>
-
-
-      {/* <Container className="mt--7" fluid>
-        <Row className="mt-5">
-          <Col xl="12">
-            <Card className="shadow">
-              <CardHeader className="border-0">
-                <Row className="align-items-center">
-                  <div className="col">
-                    <h3 className="mb-0">All Users</h3>
-                  </div>
-                  <div className="col text-right">
-                    <Button color="primary" size="sm">See all</Button>
-                  </div>
-                </Row>
-                <Row className="mt-3">
-                  <Col md="4">
-                    <FormGroup>
-                      <Input
-                        type="text"
-                        placeholder="Search Users..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col md="4">
-                    <FormGroup>
-                      <Input
-                        type="select"
-                        value={roleFilter}
-                        onChange={(e) => setRoleFilter(e.target.value)}
-                      >
-                        <option value="">All Roles</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Teacher">Teacher</option>
-                        <option value="Student">Student</option>
-                      </Input>
-                    </FormGroup>
-                  </Col>
-                </Row>
-              </CardHeader>
-              <Table className="align-items-center table-flush" responsive>
-                <thead className="thead-light">
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredUsers.map((user) => (
-                    <tr key={user._id}>
-                      <th scope="row">{user.name}</th>
-                      <td>{user.email}</td>
-                      <td>{user.role}</td>
-                      <td>
-                        <Button color="primary" size="sm" onClick={() => openEditModal(user)}>Edit</Button>{" "}
-                        <Button color="danger" size="sm" onClick={() => openDeleteModal(user._id)}>Delete</Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </Card>
-          </Col>
-        </Row>
-      </Container> */}
-
       <Modal isOpen={modalOpen} toggle={() => setModalOpen(!modalOpen)}>
         <ModalHeader toggle={() => setModalOpen(!modalOpen)}>Edit User</ModalHeader>
         <ModalBody>
