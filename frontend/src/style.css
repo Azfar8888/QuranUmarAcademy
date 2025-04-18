@@ -13,3 +13,8 @@
 .navbar-light .navbar-nav .nav-link {
     color: rgb(255 255 255) !important;
 }
+@media (max-width: 768px) {
+  .navbar-light .navbar-nav .nav-link {
+    color: black !important;
+  }
+}
