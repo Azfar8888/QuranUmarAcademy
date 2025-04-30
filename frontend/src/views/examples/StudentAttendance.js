@@ -202,7 +202,7 @@ const StudentAttendance = () => {
     const fetchAttendance = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_API_URL || "https://quranumaracademy.onrender.com"}/api/attendance/student`,
+          `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/attendance/student`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

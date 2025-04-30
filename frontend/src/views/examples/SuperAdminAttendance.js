@@ -297,7 +297,7 @@ const SuperAdminAttendance = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("https://quranumaracademy.onrender.com/api/users", {
+        const response = await axios.get("http://localhost:5000/api/users", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const allUsers = response.data;
@@ -327,7 +327,7 @@ const SuperAdminAttendance = () => {
   useEffect(() => {
     const fetchAttendanceRecords = async () => {
       try {
-        const response = await axios.get("https://quranumaracademy.onrender.com/api/attendance", {
+        const response = await axios.get("http://localhost:5000/api/attendance", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const sorted = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -345,7 +345,7 @@ const SuperAdminAttendance = () => {
   const fetchStudentsForTeacher = async (teacherId) => {
     if (!teacherId) return setStudents([]);
     try {
-      const response = await axios.get(`https://quranumaracademy.onrender.com/api/users/assigned-students/${teacherId}`, {
+      const response = await axios.get(`http://localhost:5000/api/users/assigned-students/${teacherId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setStudents(response.data || []);
@@ -373,7 +373,7 @@ const SuperAdminAttendance = () => {
       attendanceData.studentIds = selectedStudents;
     }
     try {
-      await axios.post("https://quranumaracademy.onrender.com/api/attendance/mark", attendanceData, {
+      await axios.post("http://localhost:5000/api/attendance/mark", attendanceData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessage("Attendance marked successfully!");
@@ -394,7 +394,7 @@ const SuperAdminAttendance = () => {
     if (!recordId || !newStatus) return;
     try {
       await axios.put(
-        `https://quranumaracademy.onrender.com/api/attendance/update/${recordId}`,
+        `http://localhost:5000/api/attendance/update/${recordId}`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -330,7 +330,7 @@ const TeacherAttendance = () => {
   const handleEdit = async (id, newStatus) => {
     try {
       await axios.put(
-        `${process.env.REACT_APP_API_URL || "https://quranumaracademy.onrender.com"}/api/attendance/update/${id}`,
+        `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/attendance/update/${id}`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

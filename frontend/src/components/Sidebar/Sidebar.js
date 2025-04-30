@@ -212,7 +212,7 @@ const Sidebar = (props) => {
       <Container fluid>
         {/* Toggler */}
         <button className="navbar-toggler" type="button" onClick={() => setCollapseOpen(!collapseOpen)}>
-          <span className="navbar-toggler-icon" />
+          <span className="navbar-toggler-icon bg-white" />
         </button>
 
         {/* Logo */}

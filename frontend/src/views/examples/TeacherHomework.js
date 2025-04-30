@@ -210,7 +210,7 @@ const TeacherHomework = () => {
 
   const token = localStorage.getItem("token");
   const teacherId = localStorage.getItem("userId");
-  const API_URL = process.env.REACT_APP_API_URL || "https://quranumaracademy.onrender.com";
+  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
   useEffect(() => {
     const fetchStudents = async () => {

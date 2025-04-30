@@ -127,7 +127,7 @@ const StudentHomework = () => {
     const fetchHomework = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_API_URL || "https://quranumaracademy.onrender.com"}/api/homework/student/${studentId}`,
+          `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/homework/student/${studentId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

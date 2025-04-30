@@ -45,7 +45,7 @@ const Maps = () => {
 
     try {
       // Fetch all users
-      const response = await axios.get("https://quranumaracademy.onrender.com/api/users", {
+      const response = await axios.get("http://localhost:5000/api/users", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(response.data);
@@ -74,7 +74,7 @@ const Maps = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://quranumaracademy.onrender.com/api/users",
+        "http://localhost:5000/api/users",
         newUser,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -95,7 +95,7 @@ const Maps = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `https://quranumaracademy.onrender.com/api/users/${editUser._id}`,
+        `http://localhost:5000/api/users/${editUser._id}`,
         { name: editUser.name, email: editUser.email, role: editUser.role },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -113,7 +113,7 @@ const Maps = () => {
   // Delete user
   const handleDeleteUser = async () => {
     try {
-      await axios.delete(`https://quranumaracademy.onrender.com/api/users/${deleteUserId}`, {
+      await axios.delete(`http://localhost:5000/api/users/${deleteUserId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(users.filter((user) => user._id !== deleteUserId));
@@ -134,7 +134,7 @@ const Maps = () => {
   const handleRoleChange = async (userId, newRole) => {
     try {
       const response = await axios.put(
-        "https://quranumaracademy.onrender.com/api/users/assign-role",
+        "http://localhost:5000/api/users/assign-role",
         { userId, newRole },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -153,7 +153,7 @@ const Maps = () => {
     formData.append("file", file);
 
     try {
-      await axios.post("https://quranumaracademy.onrender.com/api/users/import", formData, {
+      await axios.post("http://localhost:5000/api/users/import", formData, {
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
       });
 
@@ -166,14 +166,14 @@ const Maps = () => {
 
   // Export Users
   const handleExport = async () => {
-    window.open("https://quranumaracademy.onrender.com/api/users/export");
+    window.open("http://localhost:5000/api/users/export");
   };
   const handleAssignRole = async (userId, newRole) => {
     try {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `https://quranumaracademy.onrender.com/api/users/assign-role`,
+        `http://localhost:5000/api/users/assign-role`,
         { userId, newRole },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -196,7 +196,7 @@ const Maps = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "https://quranumaracademy.onrender.com/api/users/assign-students",
+        "http://localhost:5000/api/users/assign-students",
         { teacherId: selectedTeacher, studentIds: selectedStudents },
         { headers: { Authorization: `Bearer ${token}` } }
       );
