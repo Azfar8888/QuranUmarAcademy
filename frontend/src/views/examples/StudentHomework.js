@@ -1,102 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import {
-//   Card,
-//   CardHeader,
-//   Table,
-//   Container,
-//   Row,
-//   Spinner,
-// } from "reactstrap";
-
-// const StudentHomework = () => {
-//   const [homework, setHomework] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const studentId = localStorage.getItem("userId"); // ✅ This is fine, just needs correct value
-//   const token = localStorage.getItem("token");
-
-//   useEffect(() => {
-//     const fetchHomework = async () => {
-//       try {
-//         const res = await axios.get(
-//           `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/homework/student/${studentId}`,
-//           {
-//             headers: {
-//               Authorization: `Bearer ${token}`,
-//             },
-//           }
-//         );
-//         setHomework(res.data);
-//       } catch (error) {
-//         console.error("Error fetching homework:", error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     if (studentId && token) {
-//       fetchHomework();
-//     } else {
-//       console.warn("Student ID or token missing");
-//       setLoading(false);
-//     }
-//   }, [studentId, token]);
-
-//   return (
-//     <Container className="mt-4" fluid>
-//       <Row>
-//         <div className="col">
-//           <Card className="shadow">
-//             <CardHeader className="border-0">
-//               <h3 className="mb-0">My Homework</h3>
-//             </CardHeader>
-//             {loading ? (
-//               <div className="text-center my-5">
-//                 <Spinner color="primary" />
-//               </div>
-//             ) : (
-//               <Table className="align-items-center table-flush" responsive>
-//                 <thead className="thead-light">
-//                   <tr>
-//                     <th>Date</th>
-//                     <th>Sabaq</th>
-//                     <th>Sabqi</th>
-//                     <th>Manzil</th>
-//                     <th>Comment</th>
-//                     <th>Teacher</th>
-//                   </tr>
-//                 </thead>
-//                 <tbody>
-//                   {homework.length === 0 ? (
-//                     <tr>
-//                       <td colSpan="6" className="text-center text-muted">
-//                         No homework found.
-//                       </td>
-//                     </tr>
-//                   ) : (
-//                     homework.map((hw) => (
-//                       <tr key={hw._id}>
-//                         <td>{new Date(hw.date).toLocaleDateString()}</td>
-//                         <td dangerouslySetInnerHTML={{ __html: hw.sabaq }} />
-//                         <td dangerouslySetInnerHTML={{ __html: hw.sabqi }} />
-//                         <td dangerouslySetInnerHTML={{ __html: hw.manzil }} />
-//                         <td dangerouslySetInnerHTML={{ __html: hw.comment }} />
-//                         <td>{hw.teacher?.name || "N/A"}</td>
-//                       </tr>
-//                     ))
-//                   )}
-//                 </tbody>
-//               </Table>
-//             )}
-//           </Card>
-//         </div>
-//       </Row>
-//     </Container>
-//   );
-// };
-
-// export default StudentHomework;
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
@@ -127,7 +28,7 @@ const StudentHomework = () => {
     const fetchHomework = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/homework/student/${studentId}`,
+          `${process.env.REACT_APP_API_URL}/api/homework/student/${studentId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

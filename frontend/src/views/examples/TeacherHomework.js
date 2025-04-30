@@ -1,169 +1,4 @@
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import ReactQuill from "react-quill";
-// import "react-quill/dist/quill.snow.css";
-// import {
-//   Container,
-//   Row,
-//   Col,
-//   Card,
-//   CardHeader,
-//   CardBody,
-//   Form,
-//   FormGroup,
-//   Label,
-//   Input,
-//   Button,
-//   Spinner,
-// } from "reactstrap";
 
-// const TeacherHomework = () => {
-//   const [students, setStudents] = useState([]);
-//   const [selectedStudent, setSelectedStudent] = useState("");
-//   const [selectedDate, setSelectedDate] = useState("");
-//   const [sabaq, setSabaq] = useState("");
-//   const [sabqi, setSabqi] = useState("");
-//   const [manzil, setManzil] = useState("");
-//   const [comment, setComment] = useState("");
-//   const [message, setMessage] = useState("");
-//   const [loading, setLoading] = useState(false);
-//   const [loadingStudents, setLoadingStudents] = useState(true);
-
-//   const token = localStorage.getItem("token");
-//   const teacherId = localStorage.getItem("userId");
-//   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
-
-//   useEffect(() => {
-//     const fetchStudents = async () => {
-//       try {
-//         const res = await axios.get(
-//           `${API_URL}/api/users/assigned-students/${teacherId}`,
-//           {
-//             headers: { Authorization: `Bearer ${token}` },
-//           }
-//         );
-//         setStudents(res.data);
-//       } catch (err) {
-//         console.error("❌ Failed to load students:", err.response?.data || err.message);
-//       } finally {
-//         setLoadingStudents(false);
-//       }
-//     };
-
-//     if (teacherId && token) fetchStudents();
-//   }, [teacherId, token, API_URL]);
-
-//   const handleSubmit = async () => {
-//     if (!selectedStudent || !selectedDate) {
-//       setMessage("⚠️ Please select student and date");
-//       return;
-//     }
-
-//     setLoading(true);
-//     try {
-//       await axios.post(
-//         `${API_URL}/api/homework/assign`,
-//         {
-//           teacherId,
-//           studentId: selectedStudent,
-//           date: selectedDate,
-//           sabaq,
-//           sabqi,
-//           manzil,
-//           comment,
-//         },
-//         {
-//           headers: { Authorization: `Bearer ${token}` },
-//         }
-//       );
-//       setMessage("✅ Homework submitted successfully!");
-//       setSelectedStudent("");
-//       setSelectedDate("");
-//       setSabaq("");
-//       setSabqi("");
-//       setManzil("");
-//       setComment("");
-//     } catch (err) {
-//       console.error("❌ Homework submission error:", err.response?.data || err.message);
-//       setMessage("❌ Submission failed.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <Container className="mt--7" fluid>
-//       <Row>
-//         <Col xl="12">
-//           <Card className="shadow">
-//             <CardHeader className="border-0">
-//               <h3 className="mb-0">Teacher - Assign Homework</h3>
-//             </CardHeader>
-//             <CardBody>
-//               {message && <p>{message}</p>}
-//               <Form>
-//                 <FormGroup>
-//                   <Label>Select Student:</Label>
-//                   {loadingStudents ? (
-//                     <div><Spinner size="sm" color="primary" /> Loading students...</div>
-//                   ) : (
-//                     <Input
-//                       type="select"
-//                       value={selectedStudent}
-//                       onChange={(e) => setSelectedStudent(e.target.value)}
-//                     >
-//                       <option value="">-- Select Student --</option>
-//                       {students.map((student) => (
-//                         <option key={student._id} value={student._id}>
-//                           {student.name}
-//                         </option>
-//                       ))}
-//                     </Input>
-//                   )}
-//                 </FormGroup>
-
-//                 <FormGroup>
-//                   <Label>Date:</Label>
-//                   <Input
-//                     type="date"
-//                     value={selectedDate}
-//                     onChange={(e) => setSelectedDate(e.target.value)}
-//                   />
-//                 </FormGroup>
-
-//                 <FormGroup>
-//                   <Label>Sabaq:</Label>
-//                   <ReactQuill value={sabaq} onChange={setSabaq} />
-//                 </FormGroup>
-
-//                 <FormGroup>
-//                   <Label>Sabqi:</Label>
-//                   <ReactQuill value={sabqi} onChange={setSabqi} />
-//                 </FormGroup>
-
-//                 <FormGroup>
-//                   <Label>Manzil:</Label>
-//                   <ReactQuill value={manzil} onChange={setManzil} />
-//                 </FormGroup>
-
-//                 <FormGroup>
-//                   <Label>Comment:</Label>
-//                   <ReactQuill value={comment} onChange={setComment} />
-//                 </FormGroup>
-
-//                 <Button color="primary" onClick={handleSubmit} disabled={loading}>
-//                   {loading ? "Submitting..." : "Submit Homework"}
-//                 </Button>
-//               </Form>
-//             </CardBody>
-//           </Card>
-//         </Col>
-//       </Row>
-//     </Container>
-//   );
-// };
-
-// export default TeacherHomework;
 
 
 
@@ -210,12 +45,12 @@ const TeacherHomework = () => {
 
   const token = localStorage.getItem("token");
   const teacherId = localStorage.getItem("userId");
-  const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+  //const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const res = await axios.get(`${API_URL}/api/users/assigned-students/${teacherId}`, {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/users/assigned-students/${teacherId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setStudents(res.data);
@@ -228,7 +63,7 @@ const TeacherHomework = () => {
 
     const fetchHomework = async () => {
       try {
-        const res = await axios.get(`${API_URL}/api/homework/teacher/${teacherId}`, {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/homework/teacher/${teacherId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setHomeworkList(res.data);
@@ -264,18 +99,18 @@ const TeacherHomework = () => {
       const payload = { teacherId, studentId: selectedStudent, date: selectedDate, sabaq, sabqi, manzil, comment };
 
       if (editingHomeworkId) {
-        await axios.put(`${API_URL}/api/homework/update/${editingHomeworkId}`, payload, {
+        await axios.put(`${process.env.REACT_APP_API_URL}/api/homework/update/${editingHomeworkId}`, payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setMessage("✅ Homework updated successfully!");
       } else {
-        await axios.post(`${API_URL}/api/homework/assign`, payload, {
+        await axios.post(`${process.env.REACT_APP_API_URL}/api/homework/assign`, payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setMessage("✅ Homework submitted successfully!");
       }
 
-      const res = await axios.get(`${API_URL}/api/homework/student/${teacherId}`, {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/homework/student/${teacherId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setHomeworkList(res.data);
