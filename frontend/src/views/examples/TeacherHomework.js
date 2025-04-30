@@ -76,7 +76,7 @@ const TeacherHomework = () => {
       fetchStudents();
       fetchHomework();
     }
-  }, [teacherId, token, API_URL]);
+  }, [teacherId, token, process.env.REACT_APP_API_URL]);
 
   const resetForm = () => {
     setSelectedStudent("");
